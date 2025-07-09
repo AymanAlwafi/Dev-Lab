@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dev Lab</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="Cards">
+            <a href="Online notifier.html">
+                <img src="نقال علوم.PNG" width="align-items">
+                <Header>Online Notifier</Header>
+                <description>Discord bot that notify your server when users join voice channels !</description>
+            </a>
+        </div>
+    </div>
+    <footer id="footer"></footer>
+    <script>
+        fetch('Footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+    </script>
+</body>
