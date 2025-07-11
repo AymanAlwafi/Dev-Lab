@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Online Notifier</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="online-notifier-main-content">
+        <div class="box">
+            <img src="نقال علوم.PNG">
+            <div class="content">            
+                <p class="bot-description">Online Notifier is a simple,
+                    lightweight Discord bot that instantly notifies your server when someone joins a voice channel.
+                    It helps keep everyone informed and improves engagement in gaming, study, 
+                    or chill servers by making it easier to see who's active.
+                </p>
+                <p class="bot-description">
+                    Many Discord servers go quiet simply because members don't know who's online.
+                    That was a problem I faced in my own server — and that's where this bot idea comes to my mind.
+                    Online Notifier alerts everyone when someone joins a voice channel.
+                    This brings attention back to activity and encourages conversations and participation.
+                </p>
+                <div class="bot-description">
+                    <ul>
+                        <li>Sends a notification message when someone joins a voice channel.</li>
+                        <li>
+                            If you don't want the bot to send messages for certain channels,
+                            simply hide those channels from the bot — it won't see them.
+                        </li>
+                        <li>Lightweight and fast.</li>
+                    </ul>
+                </div>
+                <p class="bot-description">
+                    After installing the bot to your server, set the notification channel using the command:
+                    <br>!setchannel in the desired channel, and the bot will start sending notifications there.
+                </p>
+                <p class="bot-description">
+                <input type="checkbox" id="checkbox" name="checkbox">
+                <label for="checkbox">I agree to the </label>
+                <a href="T&C.html" target="_blank" class="terms-link">terms and conditions</a>
+                <div style="margin-top: 20px;">
+                    <button onclick="download()">Invite to Discord</button>
+                </div>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function download() {
+            if (document.getElementById('checkbox').checked) {
+                window.location.href = 'https://discord.com/oauth2/authorize?client_id=1333408295595016283';
+            }
+        }
+    </script>
+    <div id="footer"></div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            });
+    </script>
+    
+</body>
+</html>
+
+
