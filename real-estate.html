@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Saudi Real Estate AI — Data Mining course project using Random Forest to classify property values.">
+    <title>Saudi Real Estate AI — Ayman Alwafi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="circle-scooter.png">
+    <style>
+        /* ── PEEK PREVIEW BLOCK ─────────────────── */
+        .preview-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            transition: border-color 0.25s, transform 0.2s;
+        }
+        .preview-block:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .preview-label {
+            padding: 18px 28px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+        .preview-label-left { display: flex; flex-direction: column; gap: 4px; }
+        .preview-eyebrow {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--accent2);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .preview-title {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: #fff;
+            font-weight: 700;
+        }
+        .preview-url {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 0.04em;
+        }
+        .preview-arrow {
+            font-size: 18px;
+            color: var(--accent);
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        .preview-block:hover .preview-arrow {
+            transform: translate(3px, -3px);
+        }
+
+        /* The mini iframe peek */
+        .preview-window {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            background: #0a0e14;
+            pointer-events: none;
+        }
+        .preview-window iframe {
+            width: 200%;
+            height: 200%;
+            transform: scale(0.5);
+            transform-origin: top left;
+            border: none;
+            filter: brightness(0.92);
+        }
+        .preview-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--surface));
+            pointer-events: none;
+        }
+        .preview-footer {
+            padding: 12px 28px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-top: 1px solid var(--border);
+        }
+        .preview-footer span {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--muted);
+        }
+        .preview-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent2);
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">Ayman<span>.dev</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">home</a></li>
+            <li><a href="index.html#projects">projects</a></li>
+        </ul>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <div class="page-wrap">
+
+        <a href="index.html" class="back-link">back to projects</a>
+
+        <!-- Project header -->
+        <div class="project-header">
+            <div class="project-header-text">
+                <h1>Saudi Real Estate AI</h1>
+                <p>
+                    Machine learning project that classifies Saudi property listings
+                    as "Affordable" or "High-Value" using Random Forest — built as a
+                    Data Mining course final project.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Scikit-learn</span>
+                    <span class="tag">Random Forest</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">Data Mining</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="content-block">
+            <h2>About</h2>
+            <p>
+                This was the final project for CIS 517 — Data Mining, at Imam Abdulrahman bin Faisal University.
+                The goal was to apply the full data mining pipeline on a real-world dataset:
+                cleaning, preprocessing, building models, tuning them, and interpreting the results.
+            </p>
+            <p>
+                We worked with a dataset of 5,000+ Saudi real estate listings from Kaggle,
+                which came with challenges: Arabic text encoding, missing values, extreme
+                outliers from commercial properties, and heavily skewed price distributions.
+                The end result was a Random Forest classifier that achieved 87.6% accuracy
+                and an AUC score of 0.95.
+            </p>
+        </div>
+
+        <!-- Methodology -->
+        <div class="content-block">
+            <h2>Methodology</h2>
+            <ul>
+                <li>
+                    <strong style="color: var(--text);">Data Cleaning —</strong>
+                    Handled UTF-8-SIG Arabic encoding, dropped irrelevant columns (IDs, URLs, images),
+                    and encoded city names as integers for model compatibility.
+                </li>
+                <li>
+                    <strong style="color: var(--text);">Outlier Removal —</strong>
+                    Applied the IQR method on property area to remove extreme values
+                    (commercial buildings, palaces) that skewed the distribution.
+                    Dataset reduced from ~5,200 to ~4,850 usable records.
+                </li>
+                <li>
+                    <strong style="color: var(--text);">Target Engineering —</strong>
+                    Converted continuous price into a binary classification target:
+                    0 (Affordable) for listings at or below the median, 1 (High-Value) above it.
+                </li>
+                <li>
+                    <strong style="color: var(--text);">Model Comparison —</strong>
+                    Trained and tuned Logistic Regression (80.06%), Decision Tree (83.99%),
+                    and Random Forest (87.61%) using GridSearchCV with 5-fold cross-validation.
+                </li>
+                <li>
+                    <strong style="color: var(--text);">Key Finding —</strong>
+                    Property area and city location were the dominant price drivers,
+                    accounting for ~70% of the Random Forest's feature importance.
+                </li>
+            </ul>
+        </div>
+
+        <!-- Results -->
+        <div class="content-block">
+            <h2>Results</h2>
+            <p>
+                Random Forest outperformed both baseline models. Its ensemble of 50 decision trees
+                (max depth = 10) reduced variance and handled the non-linear relationship between
+                city location and price that Logistic Regression couldn't capture.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 16px;">
+                <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px;">
+                    <span style="font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent);">87.6%</span>
+                    <span style="display: block; font-size: 12px; color: var(--muted); margin-top: 4px;">Accuracy</span>
+                </div>
+                <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px;">
+                    <span style="font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent);">0.95</span>
+                    <span style="display: block; font-size: 12px; color: var(--muted); margin-top: 4px;">AUC Score</span>
+                </div>
+                <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px;">
+                    <span style="font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent);">5K+</span>
+                    <span style="display: block; font-size: 12px; color: var(--muted); margin-top: 4px;">Listings</span>
+                </div>
+                <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px;">
+                    <span style="font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent);">50</span>
+                    <span style="display: block; font-size: 12px; color: var(--muted); margin-top: 4px;">Trees (RF)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview peek link -->
+        <a class="preview-block" href="https://aymanalwafi.github.io/Saudi-Real-State-Analysis/" target="_blank">
+            <div class="preview-label">
+                <div class="preview-label-left">
+                    <span class="preview-eyebrow">live project page</span>
+                    <span class="preview-title">Saudi Real Estate AI — Full Report</span>
+                    <span class="preview-url">aymanalwafi.github.io/Saudi-Real-State-Analysis</span>
+                </div>
+                <span class="preview-arrow">↗</span>
+            </div>
+            <div class="preview-window">
+                <iframe
+                    src="https://aymanalwafi.github.io/Saudi-Real-State-Analysis/"
+                    title="Saudi Real Estate AI project page preview"
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin">
+                </iframe>
+                <div class="preview-fade"></div>
+            </div>
+            <div class="preview-footer">
+                <div class="preview-dot"></div>
+                <span>Click to open the full interactive report with charts and model results</span>
+            </div>
+        </a>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-copy">© 2025 <span>Ayman Alwafi</span></div>
+        <ul class="footer-links">
+            <li><a href="mailto:ayman.yousef.alwafi@gmail.com">email</a></li>
+            <li><a href="https://github.com/AymanAlwafi" target="_blank">github</a></li>
+            <li><a href="https://www.linkedin.com/in/ayman-alwafi-b56862327" target="_blank">linkedin</a></li>
+        </ul>
+    </footer>
+
+</body>
+</html>
